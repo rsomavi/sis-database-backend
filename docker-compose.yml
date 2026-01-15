@@ -1,0 +1,38 @@
+services:
+    db-service:
+        image: postgres:15
+        container_name: postgres_si1
+        environment:
+            POSTGRES_PORT: 5432
+            POSTGRES_USER: alumnodb
+            POSTGRES_PASSWORD: 1234
+            POSTGRES_DB: si1
+        ports:
+            - "9999:5432"
+        volumes:
+            - ./schema.sql:/docker-entrypoint-initdb.d/1_schema.sql
+            - ./actualiza.sql:/docker-entrypoint-initdb.d/2_actualiza.sql
+            - ./optimiza.sql:/docker-entrypoint-initdb.d/3_optimiza.sql
+            - ./populate.sql:/docker-entrypoint-initdb.d/4_populate.sql
+            - p2db_data:/var/lib/postgresql/data
+    user-service:
+        build:
+            context: .
+            dockerfile: ./user/Dockerfile
+        env_file: ./.env
+        ports:
+            - "5050:5050"
+        depends_on:
+            - db-service
+    api-service:
+        build:
+            context: .
+            dockerfile: ./api/Dockerfile
+        env_file: ./.env
+        ports:
+            - "5051:5050"
+        depends_on:
+            - db-service
+
+volumes:
+    p2db_data:
