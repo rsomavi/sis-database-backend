@@ -38,10 +38,21 @@ advanced database usage beyond basic CRUD operations.
 
 ### Setup
 
+**Important:**
+
+The `.env.example` file contains placeholder values such as `changeme` for passwords and secrets.
+You **MUST** change these values in the `.env` file before running the project, especially:
+
+- `DB_PASSWORD`
+- `POSTGRES_PASSWORD`
+- `SECRET_UUID`
+
+These values are required for security and correct application behavior.
+
 1. Create the environment configuration file:
 
 ```bash
-cp .env.example .env``
+cp .env.example .env
 ```
 2. Build and start all services:
 
