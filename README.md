@@ -31,5 +31,22 @@ advanced database usage beyond basic CRUD operations.
 - Containerized backend services using Docker
 
 ## How to Run
+
+### Requirements
+- Docker
+- Docker Compose
+
+### Setup
+
+1. Create the environment configuration file:
+
+```bash
+cp .env.example .env``
+```
+2. Build and start all services:
+
 ```bash
 docker-compose up --build
+```
+
+
